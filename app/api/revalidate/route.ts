@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
 
     // 3. Revalidar el tag (bajo demanda)
     revalidateTag(slug, "max");
+    // Opcional: revalidar la ruta principal si el layout depende de ese tag
     revalidatePath("/", "layout");
 
     // 4. Responder
