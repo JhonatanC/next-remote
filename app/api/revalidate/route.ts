@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,6 +22,7 @@ export async function POST(request: NextRequest) {
 
     // 3. Revalidar el tag (bajo demanda)
     revalidateTag(slug, "max");
+    revalidatePath("/", "layout");
 
     // 4. Responder
     return NextResponse.json({
